@@ -1,7 +1,7 @@
 import logging
 import multiprocessing
 from multiprocessing import Lock, Pool
-
+import tifffile as tiff #debug
 multiprocessing.set_start_method("spawn", True)  # ! must be at top for VScode debugging
 import argparse
 import glob
@@ -234,7 +234,6 @@ class InferManager(base.InferManager):
             proc_pool = ProcessPoolExecutor(self.nr_post_proc_workers)
 
         while len(file_path_list) > 0:
-
             hardware_stats = psutil.virtual_memory()
             available_ram = getattr(hardware_stats, "available")
             available_ram = int(available_ram * self.mem_usage)
@@ -254,7 +253,7 @@ class InferManager(base.InferManager):
             while len(file_path_list) > 0:
                 file_path = file_path_list.pop(0)
 
-                img = cv2.imread(file_path)
+                img = tiff.imread(file_path) #cv2.imread(file_path) --> tifffile for image reading instead of cv2
                 img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
                 src_shape = img.shape
 
