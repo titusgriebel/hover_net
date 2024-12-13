@@ -20,7 +20,7 @@ from dataset import get_dataset
 if __name__ == "__main__":
 
     # Determines whether to extract type map (only applicable to datasets with class labels).
-    type_classification = True
+    type_classification = False
 
     win_size = [540, 540]
     step_size = [164, 164]

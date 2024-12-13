@@ -1,7 +1,5 @@
 import subprocess
 import os
-print('test')
-
 
 def run_inference(model_dir, input_dir, output_dir, type_info_path):
     for dataset in ['tnbc']:
@@ -42,6 +40,7 @@ def run_inference(model_dir, input_dir, output_dir, type_info_path):
             command = ['python3', '/user/titus.griebel/u12649/hover_net/run_infer.py'] + args
 
             subprocess.run(command)
-            
 
-run_inference(model_dir='/mnt/lustre-grete/usr/u12649/scratch/models/models/hovernet/checkpoints', input_dir='/mnt/lustre-grete/usr/u12649/scratch/data/test' ,output_dir='/mnt/lustre-grete/usr/u12649/scratch/models/hovernet/inference/', type_info_path='/user/titus.griebel/u12649/hover_net/type_info.json')
+
+
+run_inference(model_dir='/mnt/lustre-grete/usr/u12649/scratch/models/models/hovernet/checkpoints', input_dir='/mnt/lustre-grete/usr/u12649/scratch/data', output_dir='/mnt/lustre-grete/usr/u12649/scratch/models/hovernet/inference/', type_info_path='/user/titus.griebel/u12649/hover_net/type_info.json')
