@@ -7,7 +7,7 @@ def run_inference(model_dir, input_dir, output_dir, type_info_path):
         #     continue
         input_path = os.path.join(input_dir, dataset, 'loaded_dataset/complete_dataset/images')
         for model in ['consep', 'cpm17', 'kumar', 'pannuke', 'monusac']:
-            if os.path.exists(f'/mnt/lustre-grete/usr/u12649/scratch/models/hovernet/inference/{dataset}/{model}'):
+            if os.path.exists(os.path.join(output_dir, dataset, model)):
                 continue
             output_path = os.path.join(output_dir, dataset, model)
             os.makedirs(output_dir, exist_ok=True)
@@ -43,4 +43,4 @@ def run_inference(model_dir, input_dir, output_dir, type_info_path):
 
 
 
-run_inference(model_dir='/mnt/lustre-grete/usr/u12649/scratch/models/models/hovernet/checkpoints', input_dir='/mnt/lustre-grete/usr/u12649/scratch/data', output_dir='/mnt/lustre-grete/usr/u12649/scratch/models/hovernet/inference/', type_info_path='/user/titus.griebel/u12649/hover_net/type_info.json')
+run_inference(model_dir='/mnt/lustre-grete/usr/u12649/scratch/models/models/hovernet/checkpoints', input_dir='/mnt/lustre-grete/usr/u12649/scratch/data', output_dir='/mnt/lustre-grete/usr/u12649/scratch/data/test2/test2', type_info_path='/user/titus.griebel/u12649/hover_net/type_info.json')
