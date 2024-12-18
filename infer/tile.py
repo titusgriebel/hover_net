@@ -1,11 +1,11 @@
 import logging
 import multiprocessing
 from multiprocessing import Lock, Pool
-
 multiprocessing.set_start_method("spawn", True)  # ! must be at top for VScode debugging
 import argparse
 import glob
 import json
+import imageio
 import math
 import multiprocessing as mp
 import os
@@ -234,7 +234,6 @@ class InferManager(base.InferManager):
             proc_pool = ProcessPoolExecutor(self.nr_post_proc_workers)
 
         while len(file_path_list) > 0:
-
             hardware_stats = psutil.virtual_memory()
             available_ram = getattr(hardware_stats, "available")
             available_ram = int(available_ram * self.mem_usage)
@@ -254,8 +253,8 @@ class InferManager(base.InferManager):
             while len(file_path_list) > 0:
                 file_path = file_path_list.pop(0)
 
-                img = cv2.imread(file_path)
-                img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+                img_io = imageio.imread(file_path)
+                img = img_io.astype(np.uint8)
                 src_shape = img.shape
 
                 img, patch_info, top_corner = _prepare_patching(
