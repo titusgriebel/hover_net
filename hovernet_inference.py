@@ -2,10 +2,11 @@ import subprocess
 import os
 
 def run_inference(model_dir, input_dir, output_dir, type_info_path):
-    for dataset in ['tnbc']:
-        # if os.path.exists(os.path.join('/mnt/lustre-grete/usr/u12649/scratch/models/hovernet/inference/', f'{dataset}')):
-        #     continue
-        input_path = os.path.join(input_dir, dataset, 'loaded_dataset/complete_dataset/images')
+    for dataset in [
+            'cpm15', 'cpm17', 'cryonuseg', 'janowczyk', 'lynsec', 'lizard',
+            'monusac', 'monuseg', 'nuinsseg', 'pannuke', 'puma', 'tnbc'
+            ]:
+        input_path = os.path.join(input_dir, dataset, 'loaded_dataset/complete_dataset/eval_split/test_images')
         for model in ['consep', 'cpm17', 'kumar', 'pannuke', 'monusac']:
             if os.path.exists(os.path.join(output_dir, dataset, model)):
                 continue
@@ -43,4 +44,4 @@ def run_inference(model_dir, input_dir, output_dir, type_info_path):
 
 
 
-run_inference(model_dir='/mnt/lustre-grete/usr/u12649/scratch/models/models/hovernet/checkpoints', input_dir='/mnt/lustre-grete/usr/u12649/scratch/data', output_dir='/mnt/lustre-grete/usr/u12649/scratch/data/test2/test2', type_info_path='/user/titus.griebel/u12649/hover_net/type_info.json')
+run_inference(model_dir='/mnt/lustre-grete/usr/u12649/scratch/models/models/hovernet/checkpoints', input_dir='/mnt/lustre-grete/usr/u12649/scratch/data/test', output_dir='/mnt/lustre-grete/usr/u12649/scratch/models/hovernet/inference', type_info_path='/user/titus.griebel/u12649/hover_net/type_info.json')
