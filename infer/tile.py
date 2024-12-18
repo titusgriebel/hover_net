@@ -1,11 +1,11 @@
 import logging
 import multiprocessing
 from multiprocessing import Lock, Pool
-import tifffile as tiff #debug
 multiprocessing.set_start_method("spawn", True)  # ! must be at top for VScode debugging
 import argparse
 import glob
 import json
+import imageio
 import math
 import multiprocessing as mp
 import os
@@ -253,8 +253,8 @@ class InferManager(base.InferManager):
             while len(file_path_list) > 0:
                 file_path = file_path_list.pop(0)
 
-                img = tiff.imread(file_path) #cv2.imread(file_path) --> tifffile for image reading instead of cv2
-                img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+                img_io = imageio.imread(file_path)
+                img = img_io.astype(np.uint8)
                 src_shape = img.shape
 
                 img, patch_info, top_corner = _prepare_patching(
